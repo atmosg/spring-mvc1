@@ -1,0 +1,38 @@
+package hello.servlet.web.frontcontroller.v1;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import hello.servlet.web.frontcontroller.v1.controller.MemberFormControllerV1;
+import hello.servlet.web.frontcontroller.v1.controller.MemberListController;
+import hello.servlet.web.frontcontroller.v1.controller.MemberSaveController;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+@WebServlet(name = "frontControllerServletV1", urlPatterns = "/v1/*")
+public class FrontControllerServletV1 extends HttpServlet {
+  private final Map<String, ControllerV1> controllerMap = new HashMap<>();
+
+  public FrontControllerServletV1() {
+    controllerMap.put("/v1/members/new-form", new MemberFormControllerV1());
+    controllerMap.put("/v1/members/save", new MemberSaveController());
+    controllerMap.put("/v1/members", new MemberListController());
+  }
+
+  @Override
+  protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {   
+    String requestURI = req.getRequestURI();
+    ControllerV1 controller = controllerMap.get(requestURI);
+    
+    if (controller == null) {
+      resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+      return;
+    }
+
+    controller.process(req, resp);
+  }  
+}

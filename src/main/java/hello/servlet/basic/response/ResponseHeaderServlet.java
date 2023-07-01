@@ -2,8 +2,6 @@ package hello.servlet.basic.response;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.charset.StandardCharsets;
-
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -40,7 +38,7 @@ public class ResponseHeaderServlet extends HttpServlet {
     resp.addCookie(cookie);
   }
 
-  private void redirect(HttpServletResponse resp) throws IOException {
-    resp.sendRedirect("/basic/hell-form.html");
-  }
+  // private void redirect(HttpServletResponse resp) throws IOException {
+  //   resp.sendRedirect("/basic/hell-form.html");
+  // }
 }

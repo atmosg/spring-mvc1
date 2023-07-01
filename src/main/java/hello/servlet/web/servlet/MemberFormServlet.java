@@ -3,8 +3,6 @@ package hello.servlet.web.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javax.sql.rowset.serial.SerialException;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
